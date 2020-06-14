@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {map} from 'rxjs/operators';
 import {Post} from '../_models/post';
@@ -14,15 +14,15 @@ export class PostsService {
   ) { }
 
   register(post: Post) {
-    return this.http.post(`${environment.apiUrl}/posts`, post);
+    return this.http.post(`${environment.apiUrl}/post/insert`, post);
   }
 
   getAll() {
-    return this.http.get<Post[]>(`${environment.apiUrl}/posts`);
+    return this.http.get<Post[]>(`${environment.apiUrl}/post`);
   }
 
   getById(id: string) {
-    return this.http.get<Post>(`${environment.apiUrl}/posts/${id}`);
+    return this.http.get<Post>(`${environment.apiUrl}/post/${id}`);
   }
 
   update(id, params) {
@@ -33,7 +33,7 @@ export class PostsService {
   }
 
   delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/posts/${id}`)
+    return this.http.delete(`${environment.apiUrl}/post/${id}`)
         .pipe(map(x => {
           return x;
         }));

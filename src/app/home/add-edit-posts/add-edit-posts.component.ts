@@ -36,8 +36,7 @@ export class AddEditPostsComponent implements OnInit {
       id: [this.id],
       title: ['', Validators.required],
       text: ['', Validators.required],
-      author: [this.user.firstName + ' ' + this.user.lastName],
-      user: [this.user.id]
+      users: [this.user]
     });
     if (!this.isAddMode) {
       this.postsService.getById(this.id)
@@ -82,7 +81,7 @@ export class AddEditPostsComponent implements OnInit {
   }
 
   private updatePost() {
-    this.postsService.update(this.id, this.form.value)
+    this.postsService.register(this.form.value)
         .pipe(first())
         .subscribe(
             data => {

@@ -9,6 +9,7 @@ import { User } from './_models';
 })
 export class AppComponent {
     user: User;
+    menuVisibility = false;
 
     constructor(private accountService: AccountService) {
         this.accountService.user.subscribe(x => this.user = x);
@@ -16,5 +17,9 @@ export class AppComponent {
 
     logout() {
         this.accountService.logout();
+    }
+
+    toogleMenu() {
+        this.menuVisibility = !this.menuVisibility;
     }
 }

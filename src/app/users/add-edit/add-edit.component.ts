@@ -33,6 +33,7 @@ export class AddEditComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
+            id: [null],
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
@@ -87,7 +88,8 @@ export class AddEditComponent implements OnInit {
     }
 
     private updateUser() {
-        this.accountService.update(this.id, this.form.value)
+        this.form.controls.id.setValue(this.id);
+        this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe(
                 data => {
